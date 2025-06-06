@@ -4,6 +4,15 @@ from .documents import DocumentModel, SummaryModel
 
 class CaseBase(BaseModel):
     casename: str
+    document_path: str
+    documnet_name: str
+
+class CaseResponse(BaseModel):
+    caseid: str
+    casename: str
+
+    class Config:
+        from_attributes = True
 
 class CaseModel(CaseBase):
     caseid: str
@@ -12,3 +21,5 @@ class CaseModel(CaseBase):
 
     class Config:
         from_attributes = True
+
+
