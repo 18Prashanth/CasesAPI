@@ -1,24 +1,13 @@
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
 import os
 from dotenv import load_dotenv
+import pymongo
+from pymongo.server_api import ServerApi
 
 load_dotenv()
-# Replace <username>, <password>, and <dbname> with actual values
-uri = os.getenv("MONGODB_URI")
-client = MongoClient(uri)
+uri = os.getenv("MONGO_URI")
+db_name = os.getenv("DATABASE_NAME")
 
-# Access the database
-db = client["sumxioDb"]
+client = AsyncIOMotorClient("mongodb://localhost:27017")
 
-# Access or create a collection
-collection = db["cases"]
-
-
-sample_user = {
-    "name": "Prashanth",
-    "email": "prashanth@example.com",
-    "age": 24
-}
-
-inserted_id = collection.insert_one(sample_user).inserted_id
-print(f"User inserted with ID: {inserted_id}")
+db = client[db_name]

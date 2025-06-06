@@ -5,7 +5,7 @@ from datetime import datetime
 class DocumentModel(BaseModel):
     document_id: str
     document_path: str
-    documnet_name: str
+    document_name: str
     document_status: str = "active"
 
 class SummaryModel(BaseModel):
