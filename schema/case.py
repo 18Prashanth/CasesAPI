@@ -4,9 +4,15 @@ from .documents import DocumentModel, SummaryModel
 
 class CaseBase(BaseModel):
     casename: str
+    document_path: str
+    documnet_name: str
 
-class CaseCreate(CaseBase):
-    caseid: Optional[str]  # can be auto-generated
+class CaseResponse(BaseModel):
+    caseid: str
+    casename: str
+
+    class Config:
+        from_attributes = True
 
 class CaseModel(CaseBase):
     caseid: str
@@ -14,4 +20,6 @@ class CaseModel(CaseBase):
     summaries: List[SummaryModel] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+

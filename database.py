@@ -1,22 +1,13 @@
-from pymongo import MongoClient
+from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from dotenv import load_dotenv
+import pymongo
+from pymongo.server_api import ServerApi
 
-# Replace <username>, <password>, and <dbname> with actual values
-url = "mongodb+srv://18gowda2002:YOf78stVbwBuJPnX@cluster0.unbniln.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-client = MongoClient(url)
+load_dotenv()
+uri = os.getenv("MONGO_URI")
+db_name = os.getenv("DATABASE_NAME")
 
-# Access the database
-db = client["mydatabase"]
+client = AsyncIOMotorClient("mongodb://localhost:27017")
 
-# Access or create a collection
-collection = db["users"]
-
-print("Connected to MongoDB Atlas!")
-
-sample_user = {
-    "name": "Prashanth",
-    "email": "prashanth@example.com",
-    "age": 24
-}
-
-inserted_id = collection.insert_one(sample_user).inserted_id
-print(f"User inserted with ID: {inserted_id}")
+db = client[db_name]
