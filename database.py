@@ -1,16 +1,18 @@
 from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Replace <username>, <password>, and <dbname> with actual values
-url = "mongodb+srv://18gowda2002:YOf78stVbwBuJPnX@cluster0.unbniln.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-client = MongoClient(url)
+uri = os.getenv("MONGODB_URI")
+client = MongoClient(uri)
 
 # Access the database
-db = client["mydatabase"]
+db = client["sumxioDb"]
 
 # Access or create a collection
-collection = db["users"]
+collection = db["cases"]
 
-print("Connected to MongoDB Atlas!")
 
 sample_user = {
     "name": "Prashanth",
